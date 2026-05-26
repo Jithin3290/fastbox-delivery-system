@@ -7,12 +7,13 @@ from src.report_generator import (
 )
 from src.csv_exporter import export_best_agent
 from src.utils import normalize_data
-
+from src.ascii_visualizer import print_routes
 
 def main():
-
-    data = load_json("data/data.json")
-
+    """
+    Main function to run the delivery simulation and generate reports.
+    """
+    data = load_json("data/base_case.json")
     if not data:
         return
 
@@ -23,13 +24,14 @@ def main():
         agents,
         warehouses
     )
+    
 
     results = simulate_delivery(
         assignments,
         agents,
         warehouses
     )
-
+    print_routes(assignments)
     report = generate_report(results)
 
     save_report(
@@ -42,8 +44,16 @@ def main():
         "output/top_performer.csv"
     )
 
-    print("\nFINAL REPORT\n")
-    print(report)
+    print("\nFINAL REPORT")
+    print("=" * 50)
+
+    for agent, details in report.items():
+
+        print(f"{agent}: {details}")
+
+    print("\nFiles Generated Successfully")
+    print("output/report.json")
+    print("output/top_performer.csv")
 
 
 if __name__ == "__main__":

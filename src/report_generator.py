@@ -2,6 +2,9 @@ import json
 
 
 def generate_report(results):
+    """
+    Generate a report summarizing delivery performance.
+    """
 
     best_agent = None
     best_efficiency = float("inf")

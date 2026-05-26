@@ -2,6 +2,8 @@ import csv
 
 
 def export_best_agent(report, output_file):
+    
+    """Export the best performing agent's details to a CSV file."""
 
     best_agent = report["best_agent"]
 
