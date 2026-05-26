@@ -6,6 +6,7 @@ from src.report_generator import (
     save_report
 )
 from src.csv_exporter import export_best_agent
+from src.utils import normalize_data
 
 
 def main():
@@ -15,9 +16,7 @@ def main():
     if not data:
         return
 
-    warehouses = data["warehouses"]
-    agents = data["agents"]
-    packages = data["packages"]
+    warehouses, agents, packages = normalize_data(data)
 
     assignments = assign_packages(
         packages,
